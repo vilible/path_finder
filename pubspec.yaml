@@ -1,0 +1,26 @@
+name: way_finder
+description: "A new way to find your way"
+
+publish_to: none
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  bitsdojo_window: ^0.1.6
+  provider: ^6.1.2
+  flex_color_picker: ^3.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.2
+
+flutter:
+  uses-material-design: true
