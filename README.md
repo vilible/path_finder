@@ -1,4 +1,4 @@
-# 🔍 Way Finder
+# 🔍 WayFinder
 
 *A new way to find your way*
 
