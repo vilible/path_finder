@@ -1,17 +1,21 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:flutter/material.dart';
+import "dart:io";
+
+import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "package:way_finder/app_provider.dart";
 import "package:way_finder/way_finder.dart";
 
 void main() {
-  runApp(const App());
+  if (Platform.isWindows) {
+    runApp(const App());
 
-  doWhenWindowReady(() {
-    appWindow.minSize = const Size(1100, 600);
-    appWindow.alignment = Alignment.center;
-    appWindow.show();
-  });
+    doWhenWindowReady(() {
+      appWindow.minSize = const Size(1100, 600);
+      appWindow.alignment = Alignment.center;
+      appWindow.show();
+    });
+  }
 }
 
 class App extends StatelessWidget {

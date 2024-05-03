@@ -1,4 +1,4 @@
-package com.example.way_finder
+package com.stefanski.way_finder
 
 import io.flutter.embedding.android.FlutterActivity
 
