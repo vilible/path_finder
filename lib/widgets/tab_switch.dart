@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class TabSwitch extends StatelessWidget {
   const TabSwitch({
@@ -15,16 +16,16 @@ class TabSwitch extends StatelessWidget {
     return SegmentedButton(
       showSelectedIcon: false,
       selected: <int>{selectedTab},
-      segments: const <ButtonSegment>[
+      segments: <ButtonSegment>[
         ButtonSegment(
           value: 0,
-          label: Text("Ustawienia"),
-          icon: Icon(Icons.settings_outlined),
+          label: Text(AppLocalizations.of(context)!.settings),
+          icon: const Icon(Icons.settings_outlined),
         ),
         ButtonSegment(
           value: 1,
-          label: Text("Trasa"),
-          icon: Icon(Icons.directions_outlined),
+          label: Text(AppLocalizations.of(context)!.trajectory),
+          icon: const Icon(Icons.directions_outlined),
         ),
       ],
       onSelectionChanged: (newSelection) => onChange(newSelection.first),

@@ -8,17 +8,21 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 
 # ▶️ How to run?
 
-First of all, you need to install all used packages:
+#### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
 
-```
-flutter pub get
-```
+But, if you want to compile it yourself:
+1. First of all, you need to install Flutter SDK from you [this](https://flutter.dev) website.
+2. Then, you have to go to project folder and install all used packages:
 
-Then, you can simply run the app by using this command:
+    ```
+    flutter pub get
+    ```
 
-```
-flutter run -d windows
-```
+3. After all these steps you can simply run the app by using this command:
+
+    ```
+    flutter run -d windows
+    ```
 <br>
 
 Alternatively, if you want to build it:
@@ -35,5 +39,6 @@ Alternatively, if you want to build it:
 # 📝 Current plans
 
 - [ ] Port the app on Android devices respecting the Material 3 design rules,
+- [ ] Add ability to change colors of different graph elements
 - [ ] Move from Material 3 to Fluent 2 design on Windows,
 - [ ] Optimize points generetion and path finding using (the algorithm used in ***Way Finder*** is required for the application to function as it was created, and the use of other path finding algorithms that would undoubtedly be more efficient than the one used in the program, such as Dijkstra's algorithm or the A* search algorithm, could change the operation of the application in a way undesirable)

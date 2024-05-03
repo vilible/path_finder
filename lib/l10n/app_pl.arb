@@ -1,0 +1,27 @@
+{
+  "@@locale": "pl",
+  "findWay": "Znajdź trasę",
+  "pointsQuantity": "Liczba punktów",
+  "pointsVisibility": "Widoczność punktów",
+  "settings": "Ustawienia",
+  "trajectory": "Trasa",
+  "noTrajectory": "Trasa nie została jeszcze znaleziona",
+  "trajectoryTime": "Trasa znaleziona w czasie {time}ms",
+  "@trajectoryTime": {
+    "placeholders": {
+      "time": {
+        "type": "int",
+        "example": "100"
+      }
+    }
+  },
+  "trajectoryLength": "Długosć trasy wynosi {length}px",
+  "@trajectoryLength": {
+    "placeholders": {
+      "length": {
+        "type": "String",
+        "example": "100.99"
+      }
+    }
+  }
+}

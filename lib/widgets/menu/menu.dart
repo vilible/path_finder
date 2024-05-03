@@ -21,7 +21,7 @@ class _MenuState extends State<Menu> {
       _page = switch (index) {
         0 => const Settings(),
         1 => const Trajectory(),
-        _ => throw Exception("Nieznany indeks: $index"),
+        _ => throw Exception("Unknown index: $index"),
       };
     });
   }

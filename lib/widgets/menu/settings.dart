@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:provider/provider.dart";
 import "package:way_finder/app_provider.dart";
 
@@ -19,15 +20,15 @@ class _SettingsState extends State<Settings> {
     final globalState = context.read<AppProvider>();
 
     // If the points amount is 0, there's no need to display it in the text field.
-    _controller.text = globalState.pointsAmount == 0
+    _controller.text = globalState.pointsQuantity == 0
         ? ""
-        : globalState.pointsAmount.toString();
+        : globalState.pointsQuantity.toString();
 
     _checkPointsAmount(globalState);
 
     _controller.addListener(() {
       if (_controller.text.isNotEmpty) {
-        globalState.pointsAmount = int.parse(_controller.text);
+        globalState.pointsQuantity = int.parse(_controller.text);
       }
 
       _checkPointsAmount(globalState);
@@ -38,9 +39,9 @@ class _SettingsState extends State<Settings> {
 
   /// Checks the amount of points and updates the [_isEnoughPoints] state.
   void _checkPointsAmount(AppProvider globalState) {
-    if (globalState.pointsAmount >= 3 && !_isEnoughPoints) {
+    if (globalState.pointsQuantity >= 3 && !_isEnoughPoints) {
       setState(() => _isEnoughPoints = true);
-    } else if (globalState.pointsAmount < 3 && _isEnoughPoints) {
+    } else if (globalState.pointsQuantity < 3 && _isEnoughPoints) {
       setState(() => _isEnoughPoints = false);
     }
   }
@@ -61,14 +62,14 @@ class _SettingsState extends State<Settings> {
           controller: _controller,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            label: Text("Liczba punktów"),
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            label: Text(AppLocalizations.of(context)!.pointsQuantity),
+            border: const OutlineInputBorder(),
           ),
         ),
         const SizedBox(height: 16),
         Text(
-          "Widoczność punktów:",
+          AppLocalizations.of(context)!.pointsVisibility,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Slider(
@@ -82,7 +83,7 @@ class _SettingsState extends State<Settings> {
           width: double.infinity,
           child: OutlinedButton.icon(
             icon: const Icon(Icons.search_rounded),
-            label: const Text("Znajdź trasę"),
+            label: Text(AppLocalizations.of(context)!.findWay),
             onPressed: _isEnoughPoints
                 ? () {
                     globalState.isPathVisible.value = true;

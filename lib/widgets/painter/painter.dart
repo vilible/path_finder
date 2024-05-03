@@ -38,7 +38,7 @@ class Painter extends StatelessWidget {
                 ),
                 painter: GraphPainter(
                   points: points,
-                  pointsAmount: globalState.pointsAmount,
+                  pointsQuantity: globalState.pointsQuantity,
                   pointsColor: Colors.white,
                   opacity: globalState.opacity,
                   clearTrajectory: globalState.clearTrajectory,

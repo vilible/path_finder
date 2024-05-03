@@ -17,6 +17,9 @@ dependencies:
   flex_color_picker: ^3.4.1
   window_manager: ^0.3.8
   fluent_ui: ^4.8.7
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -26,4 +29,5 @@ dev_dependencies:
   msix: ^3.16.7
 
 flutter:
+  generate: true
   uses-material-design: true

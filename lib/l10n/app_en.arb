@@ -1,0 +1,27 @@
+{
+  "@@locale": "en",
+  "findWay": "Find way",
+  "pointsQuantity": "Points quantity",
+  "pointsVisibility": "Points visibility",
+  "settings": "Settings",
+  "trajectory": "Trajectory",
+  "noTrajectory": "Trajectory has not been determined yet",
+  "trajectoryTime": "Trajectory found in {time}ms",
+  "@trajectoryTime": {
+    "placeholders": {
+      "time": {
+        "type": "int",
+        "example": "100"
+      }
+    }
+  },
+  "trajectoryLength": "Trajectory length is {length}px",
+  "@trajectoryLength": {
+    "placeholders": {
+      "length": {
+        "type": "String",
+        "example": "100.99"
+      }
+    }
+  }
+}

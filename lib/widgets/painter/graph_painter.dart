@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class GraphPainter extends CustomPainter {
   GraphPainter({
-    required this.pointsAmount,
+    required this.pointsQuantity,
     required this.opacity,
     required this.pointsColor,
     required this.points,
@@ -11,7 +11,7 @@ class GraphPainter extends CustomPainter {
     required this.clearTrajectory,
   });
 
-  final int pointsAmount;
+  final int pointsQuantity;
   final int opacity;
   final Color pointsColor;
   final List<Offset> points;
@@ -32,7 +32,7 @@ class GraphPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     if (points.isEmpty) {
-      for (var i = 0; i < pointsAmount; i++) {
+      for (var i = 0; i < pointsQuantity; i++) {
         final center = Offset(
           rand.nextDouble() * size.width,
           rand.nextDouble() * size.height,
@@ -50,7 +50,7 @@ class GraphPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(GraphPainter oldDelegate) {
-    bool isDifferentAmount = oldDelegate.pointsAmount != pointsAmount;
+    bool isDifferentAmount = oldDelegate.pointsQuantity != pointsQuantity;
     bool isDifferentOpacity = oldDelegate.opacity != opacity;
     bool isDifferentColor = oldDelegate.pointsColor != pointsColor;
 

@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:provider/provider.dart";
 import "package:way_finder/app_provider.dart";
 import "package:way_finder/way_finder.dart";
@@ -27,6 +28,8 @@ class App extends StatelessWidget {
       create: (context) => AppProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         darkTheme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.teal.shade900,
