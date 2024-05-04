@@ -17,31 +17,30 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    final globalState = context.read<AppProvider>();
+    final global = context.read<AppProvider>();
 
     // If the points amount is 0, there's no need to display it in the text field.
-    _controller.text = globalState.pointsQuantity == 0
-        ? ""
-        : globalState.pointsQuantity.toString();
+    _controller.text =
+        global.pointsQuantity == 0 ? "" : global.pointsQuantity.toString();
 
-    _checkPointsAmount(globalState);
+    _checkPointsAmount(global);
 
     _controller.addListener(() {
       if (_controller.text.isNotEmpty) {
-        globalState.pointsQuantity = int.parse(_controller.text);
+        global.pointsQuantity = int.parse(_controller.text);
       }
 
-      _checkPointsAmount(globalState);
+      _checkPointsAmount(global);
     });
 
     super.initState();
   }
 
   /// Checks the amount of points and updates the [_isEnoughPoints] state.
-  void _checkPointsAmount(AppProvider globalState) {
-    if (globalState.pointsQuantity >= 3 && !_isEnoughPoints) {
+  void _checkPointsAmount(AppProvider global) {
+    if (global.pointsQuantity >= 3 && !_isEnoughPoints) {
       setState(() => _isEnoughPoints = true);
-    } else if (globalState.pointsQuantity < 3 && _isEnoughPoints) {
+    } else if (global.pointsQuantity < 3 && _isEnoughPoints) {
       setState(() => _isEnoughPoints = false);
     }
   }
@@ -54,7 +53,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    final globalState = context.watch<AppProvider>();
+    final global = context.watch<AppProvider>();
 
     return Column(
       children: <Widget>[
@@ -73,10 +72,10 @@ class _SettingsState extends State<Settings> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Slider(
-          min: 30,
-          max: 255,
-          value: globalState.opacity.toDouble(),
-          onChanged: (value) => globalState.opacity = value.round(),
+          min: 0.3,
+          max: 1.0,
+          value: global.opacity,
+          onChanged: (value) => global.opacity = value,
         ),
         const Spacer(),
         SizedBox(
@@ -86,8 +85,8 @@ class _SettingsState extends State<Settings> {
             label: Text(AppLocalizations.of(context)!.findWay),
             onPressed: _isEnoughPoints
                 ? () {
-                    globalState.isPathVisible.value = true;
-                    globalState.newPathNotifier.value = true;
+                    global.isPathVisible.value = true;
+                    global.newPathNotifier.value = true;
                   }
                 : null,
           ),

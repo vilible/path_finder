@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppProvider extends ChangeNotifier {
   // SETTINGS
   int _pointsQuantity = 0;
-  int _opacity = 255;
+  double _opacity = 1;
   Color _pointsColor = Colors.white;
   Color _pathColor = Colors.blue;
   Color _startColor = Colors.green;
@@ -16,6 +16,7 @@ class AppProvider extends ChangeNotifier {
   final isPathVisible = ValueNotifier<bool>(false);
   final newPathNotifier = ValueNotifier<bool>(false);
 
+  int get pointsQuantity => _pointsQuantity;
   set pointsQuantity(int value) {
     if (value != _pointsQuantity) {
       _pointsQuantity = value;
@@ -23,47 +24,46 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  set opacity(int value) {
+  double get opacity => _opacity;
+  set opacity(double value) {
     _opacity = value;
     notifyListeners();
   }
 
+  Color get pointsColor => _pointsColor;
   set pointsColor(Color value) {
     _pointsColor = value;
     notifyListeners();
   }
 
+  Color get pathColor => _pathColor;
   set pathColor(Color value) {
     _pathColor = value;
     notifyListeners();
   }
 
+  Color get startColor => _startColor;
   set startColor(Color value) {
     _startColor = value;
     notifyListeners();
   }
 
+  Color get endColor => _endColor;
   set endColor(Color value) {
     _endColor = value;
     notifyListeners();
   }
 
-  int get pointsQuantity => _pointsQuantity;
-  int get opacity => _opacity;
   bool get isTrajectoryEmpty => _trajectoryPoints.isEmpty;
-  int get trajectoryTime => _trajectoryTime;
-  double get trajectoryDistance => _trajectoryDistance;
-  Color get pointsColor => _pointsColor;
-  Color get pathColor => _pathColor;
-  Color get startColor => _startColor;
-  Color get endColor => _endColor;
   List<Offset> get trajectory => List.unmodifiable(_trajectoryPoints);
 
+  double get trajectoryDistance => _trajectoryDistance;
   void setTrajectoryDistance(double value) {
     _trajectoryDistance = value;
     notifyListeners();
   }
 
+  int get trajectoryTime => _trajectoryTime;
   void setTrajctoryTime(int value) {
     _trajectoryTime = value;
     notifyListeners();

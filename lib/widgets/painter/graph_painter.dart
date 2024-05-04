@@ -12,7 +12,7 @@ class GraphPainter extends CustomPainter {
   });
 
   final int pointsQuantity;
-  final int opacity;
+  final double opacity;
   final Color pointsColor;
   final List<Offset> points;
   final void Function() clearTrajectory;
@@ -23,12 +23,7 @@ class GraphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Color.fromARGB(
-        opacity,
-        pointsColor.red,
-        pointsColor.blue,
-        pointsColor.green,
-      )
+      ..color = pointsColor.withOpacity(opacity)
       ..strokeCap = StrokeCap.round;
 
     if (points.isEmpty) {

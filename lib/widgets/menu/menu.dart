@@ -1,8 +1,8 @@
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import 'package:flutter/material.dart';
 import "package:way_finder/widgets/menu/settings.dart";
+import "package:way_finder/widgets/menu/tab_switch.dart";
 import "package:way_finder/widgets/menu/trajectory.dart";
-import "package:way_finder/widgets/tab_switch.dart";
 
 class Menu extends StatefulWidget {
   const Menu({super.key});

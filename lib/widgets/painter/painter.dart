@@ -12,7 +12,10 @@ class Painter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final globalState = context.watch<AppProvider>();
+    final global = context.watch<AppProvider>();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => global.pointsColor = Theme.of(context).colorScheme.onSurface);
 
     return Expanded(
       child: Column(
@@ -24,25 +27,25 @@ class Painter extends StatelessWidget {
                 size: const Size(double.infinity, double.infinity),
                 foregroundPainter: PathPainter(
                   points: points,
-                  pathColor: globalState.pathColor,
-                  startColor: globalState.startColor,
-                  endColor: globalState.endColor,
-                  isPathVisible: globalState.isPathVisible,
-                  newPathNotifier: globalState.newPathNotifier,
+                  pathColor: global.pathColor,
+                  startColor: global.startColor,
+                  endColor: global.endColor,
+                  isPathVisible: global.isPathVisible,
+                  newPathNotifier: global.newPathNotifier,
                   functions: <String, Function>{
-                    "setTrajectoryTime": globalState.setTrajctoryTime,
-                    "setTrajectoryDistance": globalState.setTrajectoryDistance,
-                    "setTrajectoryPoints": globalState.setTrajectory,
-                    "getTrajectory": () => globalState.trajectory,
+                    "setTrajectoryTime": global.setTrajctoryTime,
+                    "setTrajectoryDistance": global.setTrajectoryDistance,
+                    "setTrajectoryPoints": global.setTrajectory,
+                    "getTrajectory": () => global.trajectory,
                   },
                 ),
                 painter: GraphPainter(
                   points: points,
-                  pointsQuantity: globalState.pointsQuantity,
-                  pointsColor: Colors.white,
-                  opacity: globalState.opacity,
-                  clearTrajectory: globalState.clearTrajectory,
-                  pathVisibleNotifier: globalState.isPathVisible,
+                  pointsQuantity: global.pointsQuantity,
+                  pointsColor: global.pointsColor,
+                  opacity: global.opacity,
+                  clearTrajectory: global.clearTrajectory,
+                  pathVisibleNotifier: global.isPathVisible,
                 ),
               ),
             ),

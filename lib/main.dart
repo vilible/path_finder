@@ -19,6 +19,16 @@ void main() {
   }
 }
 
+final kColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.teal.shade900,
+  brightness: Brightness.light,
+);
+
+final kDarkColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.teal.shade900,
+  brightness: Brightness.dark,
+);
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -30,18 +40,8 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.teal.shade900,
-            brightness: Brightness.dark,
-          ),
-        ),
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.teal.shade900,
-            brightness: Brightness.light,
-          ),
-        ),
+        darkTheme: ThemeData(colorScheme: kDarkColorScheme),
+        theme: ThemeData(colorScheme: kColorScheme),
         home: const Scaffold(body: WayFinder()),
       ),
     );

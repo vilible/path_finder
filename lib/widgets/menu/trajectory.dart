@@ -8,9 +8,9 @@ class Trajectory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final globalState = context.watch<AppProvider>();
+    final global = context.watch<AppProvider>();
 
-    if (globalState.isTrajectoryEmpty) {
+    if (global.isTrajectoryEmpty) {
       return Text(
         AppLocalizations.of(context)!.noTrajectory,
         style: Theme.of(context).textTheme.titleMedium,
@@ -19,22 +19,21 @@ class Trajectory extends StatelessWidget {
       return Column(
         children: <Widget>[
           Text(
-            AppLocalizations.of(context)!
-                .trajectoryTime(globalState.trajectoryTime),
+            AppLocalizations.of(context)!.trajectoryTime(global.trajectoryTime),
             style: Theme.of(context).textTheme.titleMedium,
           ),
           Text(
-            AppLocalizations.of(context)!.trajectoryLength(
-                globalState.trajectoryDistance.toStringAsFixed(2)),
+            AppLocalizations.of(context)!
+                .trajectoryLength(global.trajectoryDistance.toStringAsFixed(2)),
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: globalState.trajectory.length,
+              itemCount: global.trajectory.length,
               itemBuilder: (context, index) {
-                final point = globalState.trajectory[index];
+                final point = global.trajectory[index];
 
                 //TODO: Style or replace with something better looking :)
                 return Card(
