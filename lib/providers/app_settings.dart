@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppProvider extends ChangeNotifier {
+class AppSettings extends ChangeNotifier {
   // SETTINGS
   int _pointsQuantity = 0;
   double _opacity = 1;
@@ -8,13 +8,6 @@ class AppProvider extends ChangeNotifier {
   Color _pathColor = Colors.blue;
   Color _startColor = Colors.green;
   Color _endColor = Colors.red;
-
-  // PATH
-  int _trajectoryTime = 0;
-  double _trajectoryDistance = 0;
-  final _trajectoryPoints = <Offset>[];
-  final isPathVisible = ValueNotifier<bool>(false);
-  final newPathNotifier = ValueNotifier<bool>(false);
 
   int get pointsQuantity => _pointsQuantity;
   set pointsQuantity(int value) {
@@ -53,6 +46,13 @@ class AppProvider extends ChangeNotifier {
     _endColor = value;
     notifyListeners();
   }
+
+  // PATH
+  int _trajectoryTime = 0;
+  double _trajectoryDistance = 0;
+  final _trajectoryPoints = <Offset>[];
+  final isPathVisible = ValueNotifier<bool>(false);
+  final newPathNotifier = ValueNotifier<bool>(false);
 
   bool get isTrajectoryEmpty => _trajectoryPoints.isEmpty;
   List<Offset> get trajectory => List.unmodifiable(_trajectoryPoints);

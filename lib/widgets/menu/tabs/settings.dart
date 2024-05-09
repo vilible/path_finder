@@ -1,8 +1,11 @@
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:provider/provider.dart";
-import "package:way_finder/app_provider.dart";
+import "package:way_finder/providers/app_settings.dart";
+import "package:way_finder/widgets/find_way_button.dart";
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -17,7 +20,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    final global = context.read<AppProvider>();
+    final global = context.read<AppSettings>();
 
     // If the points amount is 0, there's no need to display it in the text field.
     _controller.text =
@@ -37,7 +40,7 @@ class _SettingsState extends State<Settings> {
   }
 
   /// Checks the amount of points and updates the [_isEnoughPoints] state.
-  void _checkPointsAmount(AppProvider global) {
+  void _checkPointsAmount(AppSettings global) {
     if (global.pointsQuantity >= 3 && !_isEnoughPoints) {
       setState(() => _isEnoughPoints = true);
     } else if (global.pointsQuantity < 3 && _isEnoughPoints) {
@@ -53,7 +56,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    final global = context.watch<AppProvider>();
+    final global = context.watch<AppSettings>();
 
     return Column(
       children: <Widget>[
@@ -78,19 +81,7 @@ class _SettingsState extends State<Settings> {
           onChanged: (value) => global.opacity = value,
         ),
         const Spacer(),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            icon: const Icon(Icons.search_rounded),
-            label: Text(AppLocalizations.of(context)!.findWay),
-            onPressed: _isEnoughPoints
-                ? () {
-                    global.isPathVisible.value = true;
-                    global.newPathNotifier.value = true;
-                  }
-                : null,
-          ),
-        ),
+        if (Platform.isWindows) FindWayButton(enabled: _isEnoughPoints),
       ],
     );
   }

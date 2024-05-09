@@ -16,10 +16,11 @@ dependencies:
   provider: ^6.1.2
   flex_color_picker: ^3.4.1
   window_manager: ^0.3.8
-  fluent_ui: ^4.8.7
   flutter_localizations:
     sdk: flutter
   intl: any
+  dynamic_color: ^1.7.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

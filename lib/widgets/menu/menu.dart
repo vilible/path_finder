@@ -1,8 +1,11 @@
-import "package:bitsdojo_window/bitsdojo_window.dart";
+import "dart:io";
+
 import 'package:flutter/material.dart';
-import "package:way_finder/widgets/menu/settings.dart";
+import "package:way_finder/widgets/bars/windows_bar.dart";
+
 import "package:way_finder/widgets/menu/tab_switch.dart";
-import "package:way_finder/widgets/menu/trajectory.dart";
+import "package:way_finder/widgets/menu/tabs/settings.dart";
+import "package:way_finder/widgets/menu/tabs/trajectory.dart";
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -33,7 +36,7 @@ class _MenuState extends State<Menu> {
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Column(
         children: <Widget>[
-          WindowTitleBarBox(child: MoveWindow()),
+          if (Platform.isWindows) const WindowsBar(buttonsEnabled: false),
           TabSwitch(selectedTab: _selectedTab, onChange: _changePage),
           Expanded(
             child: Padding(

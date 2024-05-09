@@ -34,11 +34,10 @@ Alternatively, if you want to build it:
     ```
 
     That command compiles files to an executable where you can find in `<project_directory>\build\windows\x64\runner\Release`;
-3. Have fun with ***Way Finder***!
+3. Have fun with ***WayFinder***!
 
 # 📝 Current plans
 
-- [ ] Port the app on Android devices respecting the Material 3 design rules,
+- [x] Port the app on Android devices respecting the Material 3 design rules,
 - [ ] Add ability to change colors of different graph elements
-- [ ] Move from Material 3 to Fluent 2 design on Windows,
 - [ ] Optimize points generetion and path finding using (the algorithm used in ***Way Finder*** is required for the application to function as it was created, and the use of other path finding algorithms that would undoubtedly be more efficient than the one used in the program, such as Dijkstra's algorithm or the A* search algorithm, could change the operation of the application in a way undesirable)

@@ -1,8 +1,13 @@
 import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:flutter/material.dart";
 
-class WindowBar extends StatelessWidget {
-  const WindowBar({super.key});
+class WindowsBar extends StatelessWidget {
+  const WindowsBar({
+    super.key,
+    required this.buttonsEnabled,
+  });
+
+  final bool buttonsEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,8 @@ class WindowBar extends StatelessWidget {
       mouseOver: theme.colorScheme.inversePrimary,
       mouseDown: theme.colorScheme.primaryContainer,
     );
+
+    if (!buttonsEnabled) return WindowTitleBarBox(child: MoveWindow());
 
     return WindowTitleBarBox(
       child: Row(
