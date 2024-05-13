@@ -1,7 +1,10 @@
 import "dart:io";
 
 import "package:bitsdojo_window/bitsdojo_window.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:google_fonts/google_fonts.dart";
 import "package:provider/provider.dart";
 
 import "package:way_finder/providers/app_settings.dart";
@@ -19,6 +22,13 @@ final kDarkScheme = ColorScheme.fromSeed(
 );
 
 void main() {
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   runApp(const App());
 
   if (Platform.isWindows) {
@@ -35,6 +45,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return ChangeNotifierProvider(
       create: (context) => AppSettings(),
       child: Platform.isWindows

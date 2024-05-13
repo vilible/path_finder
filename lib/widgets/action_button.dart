@@ -5,11 +5,11 @@ class ActionButton extends StatelessWidget {
   const ActionButton({
     super.key,
     required this.icon,
-    required this.widget,
+    required this.child,
   });
 
   final IconData icon;
-  final Widget widget;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ActionButton extends StatelessWidget {
         icon,
         color: Theme.of(context).colorScheme.primary,
       ),
-      onPressed: () => showModal(context, widget),
+      onPressed: () => showModal(context, child),
     );
   }
 }

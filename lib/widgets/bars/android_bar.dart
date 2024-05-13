@@ -12,21 +12,32 @@ class AndroidBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: RichText(
         text: TextSpan(
-          text: "Way",
-          style: GoogleFonts.pacifico(
-            fontSize: 24,
-          ),
+          style: GoogleFonts.pacifico(fontSize: 24),
           children: [
             TextSpan(
+              text: "Way",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+            TextSpan(
               text: "Finder",
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ],
         ),
       ),
       actions: const [
-        ActionButton(icon: Icons.directions_outlined, widget: Trajectory()),
-        ActionButton(icon: Icons.settings_outlined, widget: Settings()),
+        ActionButton(
+          icon: Icons.directions_outlined,
+          child: Trajectory(),
+        ),
+        ActionButton(
+          icon: Icons.settings_outlined,
+          child: Settings(),
+        ),
       ],
     );
   }

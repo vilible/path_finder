@@ -18,10 +18,9 @@ class FindWayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final global = context.watch<AppSettings>();
-
-    return SizedBox(
+    final button = SizedBox(
       width: double.infinity,
-      child: OutlinedButton.icon(
+      child: FilledButton.icon(
         icon: const Icon(Icons.search_rounded),
         label: Text(AppLocalizations.of(context)!.findWay),
         onPressed: enabled
@@ -36,6 +35,15 @@ class FindWayButton extends StatelessWidget {
               }
             : null,
       ),
+    );
+
+    if (Platform.isWindows) {
+      return button;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: button,
     );
   }
 }
