@@ -10,31 +10,25 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 
 #### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
 
-But, if you want to compile it yourself:
-1. First of all, you need to install Flutter SDK from you [this](https://flutter.dev) website.
-2. Then, you have to go to project folder and install all used packages:
+## 🖥️ Windows
 
-    ```
-    flutter pub get
-    ```
-
-3. After all these steps you can simply run the app by using this command:
-
-    ```
-    flutter run -d windows
-    ```
-<br>
-
-Alternatively, if you want to build it:
-1. Install the latest version of Visual Studio IDE with **Desktop development with C++** workload;
+1. Install [Flutter SDK](https://flutter.dev/) and the latest version of [Visual Studio IDE](https://visualstudio.microsoft.com/pl/) with **Desktop development with C++** workload that allows you to run apps on Windows
 2. In a CMD with a path set to the project folder, run this command:
-   
     ```
     flutter build windows
     ```
+3. In `<project>\build\windows\x64\runner\Release` you can find a compiled executable that you can run
+4. Have fun with ***WayFinder***!
 
-    That command compiles files to an executable where you can find in `<project_directory>\build\windows\x64\runner\Release`;
-3. Have fun with ***WayFinder***!
+## 📱 Android
+
+1. Install [Flutter SDK](https://flutter.dev/) and the latest version of [Android Studio](https://developer.android.com/studio) that allows you to compile apps on Android
+2. In a CMD with a path set to the project folder, run this command:
+    ```
+    flutter build apk
+    ```
+3. In `<project>\build\app\outputs\flutter-apk` you can find a compiled APK that you can run on your mobile phone
+4. Have fun with ***WayFinder***!
 
 # 📝 Current plans
 
