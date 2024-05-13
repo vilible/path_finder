@@ -8,7 +8,7 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 
 # ▶️ How to run?
 
-#### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
+### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
 
 ## 🖥️ Windows
 
