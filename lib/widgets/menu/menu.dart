@@ -15,15 +15,15 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  Widget _page = const Settings();
+  Widget _page = const SettingsTab();
   int _selectedTab = 0;
 
   void _changePage(int index) {
     setState(() {
       _selectedTab = index;
       _page = switch (index) {
-        0 => const Settings(),
-        1 => const Trajectory(),
+        0 => const SettingsTab(),
+        1 => const TrajectoryTab(),
         _ => throw Exception("Unknown index: $index"),
       };
     });

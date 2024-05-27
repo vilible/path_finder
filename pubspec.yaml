@@ -3,7 +3,7 @@ description: "A new way to find your way"
 
 publish_to: none
 
-version: 2.0.1
+version: 2.1.0
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -13,21 +13,22 @@ dependencies:
     sdk: flutter
 
   bitsdojo_window: ^0.1.6
-  provider: ^6.1.2
   flex_color_picker: ^3.4.1
-  window_manager: ^0.3.8
   flutter_localizations:
     sdk: flutter
   intl: any
   dynamic_color: ^1.7.0
   google_fonts: ^6.2.1
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
   msix: ^3.16.7
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
 
 flutter:
   generate: true

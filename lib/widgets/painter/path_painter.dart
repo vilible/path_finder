@@ -1,32 +1,37 @@
 import "dart:math";
+import "dart:ui";
 
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:way_finder/providers/trajectory_provider.dart";
 
 class PathPainter extends CustomPainter {
   PathPainter({
+    required this.ref,
     required this.points,
+    required this.trajectory,
     required this.pathColor,
     required this.startColor,
     required this.endColor,
-    required this.newPathNotifier,
-    required this.isPathVisible,
-    required this.functions,
-  }) : super(repaint: newPathNotifier);
+    required this.isVisible,
+    required this.drawNew,
+  });
 
-  final ValueNotifier<bool> isPathVisible;
-  final ValueNotifier<bool> newPathNotifier;
-
+  final WidgetRef ref;
+  final List<Offset> points;
+  final List<Offset> trajectory;
   final Color pathColor;
   final Color startColor;
   final Color endColor;
-  final List<Offset> points;
-  final Map<String, Function> functions;
+
+  final bool isVisible;
+  final bool drawNew;
 
   final Random rand = Random();
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (!isPathVisible.value) return;
+    if (!isVisible) return;
 
     final pathPaint = Paint()
       ..color = pathColor
@@ -43,57 +48,55 @@ class PathPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 2;
 
+    List<Offset> path = trajectory;
     Offset start, end;
 
-    if (newPathNotifier.value) {
+    if (drawNew) {
       do {
         start = points[rand.nextInt(points.length)];
         end = points[rand.nextInt(points.length)];
       } while (start == end);
 
       double distance = 0;
-      final path = <Offset>[start];
+      Offset current = start;
+      path = <Offset>[start];
+
       final stopWatch = Stopwatch()..start();
 
       do {
-        final (closest, closestDistance) = _getClosestPoint(start, end);
+        final (closest, closestDistance) = _getClosestPoint(current, end);
         if (closest == null) break;
-
-        canvas.drawLine(path.last, closest, pathPaint);
 
         distance += closestDistance;
         path.add(closest);
-        start = closest;
-      } while (start != end);
+        current = closest;
+      } while (current != end);
 
       final duration = stopWatch.elapsedMilliseconds;
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        functions["setTrajectoryTime"]!(duration);
-        functions["setTrajectoryDistance"]!(distance);
-        functions["setTrajectoryPoints"]!(path);
+        final provider = ref.read(trajectoryProvider.notifier);
+
+        provider.setTime(duration);
+        provider.setDistance(distance);
+        provider.setPoints(path);
       });
     } else {
-      final List<Offset> path = functions["getTrajectory"]!();
-
       start = path.first;
       end = path.last;
-
-      for (int i = 0; i < path.length - 1; i++) {
-        canvas.drawLine(path[i], path[i + 1], pathPaint);
-      }
     }
 
+    canvas.drawPoints(PointMode.polygon, path, pathPaint);
     canvas.drawCircle(start, 4, startPaint);
     canvas.drawCircle(end, 4, endPaint);
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => newPathNotifier.value = false);
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => ref.read(trajectoryProvider.notifier).setDrawNew(false));
   }
 
   @override
   bool shouldRepaint(PathPainter oldDelegate) {
-    return isPathVisible.value || newPathNotifier.value;
+    return drawNew || oldDelegate.isVisible != isVisible;
   }
 
   /// Get the CLOSEST point to the CURRENT point that does not move away from the END point.

@@ -4,10 +4,9 @@ import "package:bitsdojo_window/bitsdojo_window.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:provider/provider.dart";
 
-import "package:way_finder/providers/app_settings.dart";
 import "package:way_finder/screens/android_screen.dart";
 import "package:way_finder/screens/windows_screen.dart";
 
@@ -29,7 +28,7 @@ void main() {
 
   GoogleFonts.config.allowRuntimeFetching = false;
 
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 
   if (Platform.isWindows) {
     doWhenWindowReady(() {
@@ -47,17 +46,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    return ChangeNotifierProvider(
-      create: (context) => AppSettings(),
-      child: Platform.isWindows
-          ? WindowsScreen(
-              lightScheme: kLightScheme,
-              darkScheme: kDarkScheme,
-            )
-          : AndroidScreen(
-              fallbackLight: kLightScheme,
-              fallbackDark: kDarkScheme,
-            ),
-    );
+    return Platform.isWindows
+        ? WindowsScreen(
+            lightScheme: kLightScheme,
+            darkScheme: kDarkScheme,
+          )
+        : AndroidScreen(
+            fallbackLight: kLightScheme,
+            fallbackDark: kDarkScheme,
+          );
   }
 }

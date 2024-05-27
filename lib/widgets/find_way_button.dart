@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import 'package:provider/provider.dart';
-import 'package:way_finder/providers/app_settings.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:way_finder/providers/settings_provider.dart';
+import 'package:way_finder/providers/trajectory_provider.dart';
 import 'package:way_finder/utils.dart';
 import 'package:way_finder/widgets/menu/tabs/settings.dart';
 
-class FindWayButton extends StatelessWidget {
+class FindWayButton extends ConsumerWidget {
   const FindWayButton({
     super.key,
     this.enabled = true,
@@ -16,8 +18,7 @@ class FindWayButton extends StatelessWidget {
   final bool enabled;
 
   @override
-  Widget build(BuildContext context) {
-    final global = context.watch<AppSettings>();
+  Widget build(BuildContext context, WidgetRef ref) {
     final button = SizedBox(
       width: double.infinity,
       child: FilledButton.icon(
@@ -25,13 +26,17 @@ class FindWayButton extends StatelessWidget {
         label: Text(AppLocalizations.of(context)!.findWay),
         onPressed: enabled
             ? () {
-                if (Platform.isAndroid && global.pointsQuantity < 3) {
-                  showModal(context, const Settings());
+                final pointsQuantity =
+                    ref.read(settingsProvider)[Settings.pointsQuantity] as int;
+                final trajectory = ref.read(trajectoryProvider.notifier);
+
+                if (Platform.isAndroid && pointsQuantity < 3) {
+                  showModal(context, const SettingsTab());
                   return;
                 }
 
-                global.isPathVisible.value = true;
-                global.newPathNotifier.value = true;
+                trajectory.setDrawNew(true);
+                trajectory.setVisibility(true);
               }
             : null,
       ),

@@ -3,49 +3,28 @@ import "dart:io";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "package:provider/provider.dart";
-import "package:way_finder/providers/app_settings.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+
+import "package:way_finder/providers/settings_provider.dart";
 import "package:way_finder/widgets/find_way_button.dart";
 
-class Settings extends StatefulWidget {
-  const Settings({super.key});
+class SettingsTab extends ConsumerStatefulWidget {
+  const SettingsTab({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  ConsumerState<SettingsTab> createState() => _SettingsTabState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsTabState extends ConsumerState<SettingsTab> {
   final _controller = TextEditingController();
-  bool _isEnoughPoints = false;
 
   @override
   void initState() {
-    final global = context.read<AppSettings>();
+    super.initState();
+    final pointsQuantity = ref.read(settingsProvider)[Settings.pointsQuantity];
 
     // If the points amount is 0, there's no need to display it in the text field.
-    _controller.text =
-        global.pointsQuantity == 0 ? "" : global.pointsQuantity.toString();
-
-    _checkPointsAmount(global);
-
-    _controller.addListener(() {
-      if (_controller.text.isNotEmpty) {
-        global.pointsQuantity = int.parse(_controller.text);
-      }
-
-      _checkPointsAmount(global);
-    });
-
-    super.initState();
-  }
-
-  /// Checks the amount of points and updates the [_isEnoughPoints] state.
-  void _checkPointsAmount(AppSettings global) {
-    if (global.pointsQuantity >= 3 && !_isEnoughPoints) {
-      setState(() => _isEnoughPoints = true);
-    } else if (global.pointsQuantity < 3 && _isEnoughPoints) {
-      setState(() => _isEnoughPoints = false);
-    }
+    _controller.text = pointsQuantity == 0 ? "" : pointsQuantity.toString();
   }
 
   @override
@@ -56,7 +35,9 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    final global = context.watch<AppSettings>();
+    final settings = ref.watch(settingsProvider);
+    // The button should be enabled only if the points amount is enough (greater or equal to 3).
+    final enabledButton = (settings[Settings.pointsQuantity] as int) >= 3;
 
     return Column(
       children: <Widget>[
@@ -64,10 +45,18 @@ class _SettingsState extends State<Settings> {
           controller: _controller,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           keyboardType: TextInputType.number,
+          cursorOpacityAnimates: true,
           decoration: InputDecoration(
             label: Text(AppLocalizations.of(context)!.pointsQuantity),
             border: const OutlineInputBorder(),
           ),
+          onChanged: (value) {
+            if (value.isNotEmpty) {
+              ref
+                  .read(settingsProvider.notifier)
+                  .setPointsQuantity(int.parse(value));
+            }
+          },
         ),
         const SizedBox(height: 16),
         Text(
@@ -75,13 +64,14 @@ class _SettingsState extends State<Settings> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Slider(
-          min: 0.3,
+          min: 0.25,
           max: 1.0,
-          value: global.opacity,
-          onChanged: (value) => global.opacity = value,
+          value: settings[Settings.opacity] as double,
+          onChanged: (value) =>
+              ref.read(settingsProvider.notifier).setOpacity(value),
         ),
         const Spacer(),
-        if (Platform.isWindows) FindWayButton(enabled: _isEnoughPoints),
+        if (Platform.isWindows) FindWayButton(enabled: enabledButton),
       ],
     );
   }

@@ -17,7 +17,7 @@ class AndroidBar extends StatelessWidget implements PreferredSizeWidget {
             TextSpan(
               text: "Way",
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             TextSpan(
@@ -32,11 +32,11 @@ class AndroidBar extends StatelessWidget implements PreferredSizeWidget {
       actions: const [
         ActionButton(
           icon: Icons.directions_outlined,
-          child: Trajectory(),
+          child: TrajectoryTab(),
         ),
         ActionButton(
           icon: Icons.settings_outlined,
-          child: Settings(),
+          child: SettingsTab(),
         ),
       ],
     );
