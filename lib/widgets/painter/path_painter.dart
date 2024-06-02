@@ -96,7 +96,16 @@ class PathPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(PathPainter oldDelegate) {
-    return drawNew || oldDelegate.isVisible != isVisible;
+    bool isDifferentVisibility = oldDelegate.isVisible != isVisible;
+    bool isDifferentPathColor = oldDelegate.pathColor != pathColor;
+    bool isDifferentStartColor = oldDelegate.startColor != startColor;
+    bool isDifferentEndColor = oldDelegate.endColor != endColor;
+
+    return drawNew ||
+        isDifferentVisibility ||
+        isDifferentPathColor ||
+        isDifferentStartColor ||
+        isDifferentEndColor;
   }
 
   /// Get the CLOSEST point to the CURRENT point that does not move away from the END point.

@@ -42,13 +42,13 @@ class FindWayButton extends ConsumerWidget {
       ),
     );
 
-    if (Platform.isWindows) {
-      return button;
+    if (Platform.isAndroid) {
+      return Padding(
+        padding: const EdgeInsets.all(5),
+        child: button,
+      );
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: button,
-    );
+    return button;
   }
 }

@@ -26,7 +26,7 @@ class GraphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = pointsColor.withOpacity(opacity)
-      ..strokeWidth = 2.5
+      ..strokeWidth = 2.8
       ..strokeCap = StrokeCap.round;
 
     if (points.isEmpty) {

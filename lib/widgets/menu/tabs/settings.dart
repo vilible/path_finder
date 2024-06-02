@@ -6,6 +6,7 @@ import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "package:way_finder/providers/settings_provider.dart";
+import "package:way_finder/widgets/color_picker_tile.dart";
 import "package:way_finder/widgets/find_way_button.dart";
 
 class SettingsTab extends ConsumerStatefulWidget {
@@ -40,6 +41,7 @@ class _SettingsTabState extends ConsumerState<SettingsTab> {
     final enabledButton = (settings[Settings.pointsQuantity] as int) >= 3;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextField(
           controller: _controller,
@@ -58,14 +60,39 @@ class _SettingsTabState extends ConsumerState<SettingsTab> {
             }
           },
         ),
-        const SizedBox(height: 16),
-        Text(
-          AppLocalizations.of(context)!.pointsVisibility,
-          style: Theme.of(context).textTheme.titleMedium,
+        const SizedBox(height: 8),
+        ColorPickerTile(
+          title: AppLocalizations.of(context)!.pointsColor,
+          currentColor: settings[Settings.pointsColor] as Color,
+          onColorChanged: ref.read(settingsProvider.notifier).setPointsColor,
+        ),
+        ColorPickerTile(
+          title: AppLocalizations.of(context)!.pathColor,
+          currentColor: settings[Settings.pathColor] as Color,
+          onColorChanged: ref.read(settingsProvider.notifier).setPathColor,
+        ),
+        ColorPickerTile(
+          title: AppLocalizations.of(context)!.startPointColor,
+          currentColor: settings[Settings.startColor] as Color,
+          onColorChanged: ref.read(settingsProvider.notifier).setStartColor,
+        ),
+        ColorPickerTile(
+          title: AppLocalizations.of(context)!.endPointColor,
+          currentColor: settings[Settings.endColor] as Color,
+          onColorChanged: ref.read(settingsProvider.notifier).setEndColor,
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            const SizedBox(width: 10),
+            Text(
+              AppLocalizations.of(context)!.pointsVisibility,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
         ),
         Slider(
-          min: 0.25,
-          max: 1.0,
+          min: 0.2,
           value: settings[Settings.opacity] as double,
           onChanged: (value) =>
               ref.read(settingsProvider.notifier).setOpacity(value),
