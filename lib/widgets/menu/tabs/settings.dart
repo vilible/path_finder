@@ -38,7 +38,7 @@ class _SettingsTabState extends ConsumerState<SettingsTab> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
     // The button should be enabled only if the points amount is enough (greater or equal to 3).
-    final enabledButton = (settings[Settings.pointsQuantity] as int) >= 3;
+    final enabledButton = settings[Settings.pointsQuantity] >= 3;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,22 +63,22 @@ class _SettingsTabState extends ConsumerState<SettingsTab> {
         const SizedBox(height: 8),
         ColorPickerTile(
           title: AppLocalizations.of(context)!.pointsColor,
-          currentColor: settings[Settings.pointsColor] as Color,
+          currentColor: settings[Settings.pointsColor],
           onColorChanged: ref.read(settingsProvider.notifier).setPointsColor,
         ),
         ColorPickerTile(
           title: AppLocalizations.of(context)!.pathColor,
-          currentColor: settings[Settings.pathColor] as Color,
+          currentColor: settings[Settings.pathColor],
           onColorChanged: ref.read(settingsProvider.notifier).setPathColor,
         ),
         ColorPickerTile(
           title: AppLocalizations.of(context)!.startPointColor,
-          currentColor: settings[Settings.startColor] as Color,
+          currentColor: settings[Settings.startColor],
           onColorChanged: ref.read(settingsProvider.notifier).setStartColor,
         ),
         ColorPickerTile(
           title: AppLocalizations.of(context)!.endPointColor,
-          currentColor: settings[Settings.endColor] as Color,
+          currentColor: settings[Settings.endColor],
           onColorChanged: ref.read(settingsProvider.notifier).setEndColor,
         ),
         const SizedBox(height: 8),
@@ -93,9 +93,10 @@ class _SettingsTabState extends ConsumerState<SettingsTab> {
         ),
         Slider(
           min: 0.2,
-          value: settings[Settings.opacity] as double,
-          onChanged: (value) =>
-              ref.read(settingsProvider.notifier).setOpacity(value),
+          value: settings[Settings.opacity],
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setOpacity(double.parse(value.toStringAsFixed(2))),
         ),
         const Spacer(),
         if (Platform.isWindows) FindWayButton(enabled: enabledButton),

@@ -9,9 +9,9 @@ enum Trajectory {
   drawNew,
 }
 
-class TrajectoryNotifier extends Notifier<Map<Trajectory, Object>> {
+class TrajectoryNotifier extends Notifier<Map<Trajectory, dynamic>> {
   @override
-  Map<Trajectory, Object> build() => {
+  Map<Trajectory, dynamic> build() => {
         Trajectory.time: 0,
         Trajectory.distance: 0.0,
         Trajectory.points: <Offset>[],
@@ -63,5 +63,5 @@ class TrajectoryNotifier extends Notifier<Map<Trajectory, Object>> {
 }
 
 final trajectoryProvider =
-    NotifierProvider<TrajectoryNotifier, Map<Trajectory, Object>>(
+    NotifierProvider<TrajectoryNotifier, Map<Trajectory, dynamic>>(
         TrajectoryNotifier.new);

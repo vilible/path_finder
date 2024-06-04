@@ -27,7 +27,7 @@ class FindWayButton extends ConsumerWidget {
         onPressed: enabled
             ? () {
                 final pointsQuantity =
-                    ref.read(settingsProvider)[Settings.pointsQuantity] as int;
+                    ref.read(settingsProvider)[Settings.pointsQuantity];
                 final trajectory = ref.read(trajectoryProvider.notifier);
 
                 if (Platform.isAndroid && pointsQuantity < 3) {

@@ -33,13 +33,13 @@ class TrajectoryTab extends ConsumerWidget {
       children: <Widget>[
         Text(
           AppLocalizations.of(context)!.trajectoryTime(
-            trajectory[Trajectory.time] as int,
+            trajectory[Trajectory.time],
           ),
           style: theme.textTheme.titleMedium,
         ),
         Text(
           AppLocalizations.of(context)!.trajectoryLength(
-            (trajectory[Trajectory.distance] as double).toStringAsFixed(2),
+            (trajectory[Trajectory.distance]).toStringAsFixed(2),
           ),
           style: theme.textTheme.titleMedium,
         ),
