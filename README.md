@@ -1,6 +1,8 @@
 # 🔍 WayFinder
 
-*A new way to find your way*
+### A new way to find your way
+
+![windows](https://github.com/vilible/way_finder/assets/93862772/10875187-c9f3-4608-b5d5-4ae80095b279)
 
 ## 🤔 What is this app for?
 
@@ -9,6 +11,8 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 ## ▶️ How to run?
 
 #### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
+
+<hr>
 
 ### 🖥️ Windows
 
@@ -20,6 +24,8 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 3. In `<project>\build\windows\x64\runner\Release` you can find a compiled executable that you can run
 4. Have fun with ***WayFinder***!
 
+<hr>
+
 ### 📱 Android
 
 1. Install [Flutter SDK](https://flutter.dev/) and the latest version of [Android Studio](https://developer.android.com/studio) that allows you to compile apps on Android
@@ -30,8 +36,10 @@ The purpose of Way Finder is to use its full potential in finding a path from po
 3. In `<project>\build\app\outputs\flutter-apk` you can find a compiled APK that you can run on your mobile phone
 4. Have fun with ***WayFinder***!
 
+<hr>
+
 ## 📝 Current plans
 
 - [x] Port the app on Android devices respecting the Material 3 design rules,
-- [ ] Add ability to change colors of different graph elements
+- [x] Add ability to change colors of different graph elements
 - [x] Optimize points generation and path finding
