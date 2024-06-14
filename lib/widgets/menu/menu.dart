@@ -1,5 +1,3 @@
-import "dart:io";
-
 import 'package:flutter/material.dart';
 import "package:way_finder/widgets/bars/windows_bar.dart";
 
@@ -15,17 +13,29 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  Widget _page = const SettingsTab();
+  late PageController _controller;
   int _selectedTab = 0;
+
+  @override
+  void initState() {
+    _controller = PageController(initialPage: _selectedTab);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _changePage(int index) {
     setState(() {
       _selectedTab = index;
-      _page = switch (index) {
-        0 => const SettingsTab(),
-        1 => const TrajectoryTab(),
-        _ => throw Exception("Unknown index: $index"),
-      };
+      _controller.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutSine,
+      );
     });
   }
 
@@ -36,12 +46,21 @@ class _MenuState extends State<Menu> {
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Column(
         children: <Widget>[
-          if (Platform.isWindows) const WindowsBar(buttonsEnabled: false),
+          const WindowsBar(buttonsEnabled: false),
           TabSwitch(selectedTab: _selectedTab, onChange: _changePage),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: _page,
+            child: PageView(
+              controller: _controller,
+              children: const <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: SettingsTab(),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: TrajectoryTab(),
+                ),
+              ],
             ),
           ),
         ],
@@ -49,3 +68,6 @@ class _MenuState extends State<Menu> {
     );
   }
 }
+
+// switchInCurve: Curves.easeOutSine,
+// switchOutCurve: Curves.easeOutSine,

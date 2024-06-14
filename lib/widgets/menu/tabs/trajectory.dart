@@ -1,5 +1,3 @@
-import "dart:io";
-
 import "package:flutter/material.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
@@ -14,19 +12,15 @@ class TrajectoryTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final trajectory = ref.watch(trajectoryProvider);
-    final points = trajectory[Trajectory.points] as List<Offset>;
+    final points = trajectory[Trajectory.points];
 
     if (points.isEmpty) {
-      final trajectoryInfo = Text(
-        AppLocalizations.of(context)!.noTrajectory,
-        style: theme.textTheme.titleMedium,
+      return Center(
+        child: Text(
+          AppLocalizations.of(context)!.noTrajectory,
+          style: theme.textTheme.titleMedium,
+        ),
       );
-
-      if (Platform.isAndroid) {
-        return Center(child: trajectoryInfo);
-      } else {
-        return trajectoryInfo;
-      }
     }
 
     return Column(
