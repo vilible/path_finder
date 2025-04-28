@@ -20,15 +20,15 @@ dependencies:
   dynamic_color: ^1.7.0
   google_fonts: ^6.2.1
   flutter_riverpod: ^2.5.1
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   msix: ^3.16.7
-  custom_lint: ^0.6.4
+  custom_lint: ^0.7.0
   riverpod_lint: ^2.3.10
 
 flutter:
