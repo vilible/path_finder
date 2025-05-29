@@ -2,9 +2,8 @@ import "dart:io";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
+import "package:way_finder/l10n/app_localizations.dart";
 import "package:way_finder/providers/settings_provider.dart";
 import "package:way_finder/widgets/color_picker_tile.dart";
 import "package:way_finder/widgets/find_way_button.dart";

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import "package:way_finder/l10n/app_localizations.dart";
 
 class TabSwitch extends StatelessWidget {
   const TabSwitch({
