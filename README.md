@@ -2,7 +2,7 @@
 
 ### A new way to find your way
 
-![windows](https://github.com/vilible/way_finder/assets/93862772/10875187-c9f3-4608-b5d5-4ae80095b279)
+![windows](https://github.com/user-attachments/assets/c9d304c5-f470-4eb4-b8b0-ed708a910065)
 
 ## 🤔 What is this app for?
 
