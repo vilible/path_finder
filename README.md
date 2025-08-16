@@ -1,16 +1,16 @@
-# 🔍 WayFinder
+# 🔍 PathFinder
 
-### A new way to find your way
+### Find your path to the unknown
 
 ![windows](https://github.com/user-attachments/assets/c9d304c5-f470-4eb4-b8b0-ed708a910065)
 
 ## 🤔 What is this app for?
 
-The purpose of Way Finder is to use its full potential in finding a path from point A to point B using the points it generates. The path finding algorithm prioritizes to keep the length between points as short as possible, so the path may not be the shortest, but the shapes created can be amazing.
+The purpose of PathFinder is to use its full potential in finding a path from point A to point B using the points it generates. The path finding algorithm prioritizes to keep the length between points as short as possible, so the path may not be the shortest, but the shapes created can be amazing.
 
 ## ▶️ How to run?
 
-#### For compiled binaries go to [Releases](https://github.com/vilible/way_finder/releases).
+#### For compiled binaries go to [Releases](https://github.com/vilible/path_finder/releases).
 
 <hr>
 
@@ -22,7 +22,7 @@ The purpose of Way Finder is to use its full potential in finding a path from po
     flutter build windows
     ```
 3. In `<project>\build\windows\x64\runner\Release` you can find a compiled executable that you can run
-4. Have fun with ***WayFinder***!
+4. Have fun with ***PathFinder***!
 
 <hr>
 
@@ -34,7 +34,7 @@ The purpose of Way Finder is to use its full potential in finding a path from po
     flutter build apk
     ```
 3. In `<project>\build\app\outputs\flutter-apk` you can find a compiled APK that you can run on your mobile phone
-4. Have fun with ***WayFinder***!
+4. Have fun with ***PathFinder***!
 
 <hr>
 
